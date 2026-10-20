@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lá Thư Gửi Mẹ Yêu Thương</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: linear-gradient(135deg, #4b1028, #9e3454, #f4a6b8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    overflow: hidden;
+}
+
+/* Hoa hồng rơi từ từ */
+.petal {
+    position: fixed;
+    top: -50px;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    animation: fall linear forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-5vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    30% {
+        transform: translateY(30vh) translateX(20px) rotate(100deg);
+    }
+    60% {
+        transform: translateY(65vh) translateX(-20px) rotate(230deg);
+    }
+    100% {
+        transform: translateY(110vh) translateX(30px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Khung chính */
+.container {
+    width: 100%;
+    max-width: 480px;
+    max-height: 94vh;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* Màn hình chào ban đầu */
+.intro {
+    color: #fff5f7;
+    padding: 20px 10px;
+}
+
+.intro .icon {
+    font-size: 52px;
+    margin-bottom: 12px;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+.intro h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(23px, 5vw, 31px);
+    line-height: 1.4;
+    margin-bottom: 14px;
+    text-shadow: 0 3px 10px #53152b;
+}
+
+.intro p {
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+/* Nút mở thư */
+button {
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.25s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.open-btn {
+    margin-top: 24px;
+    padding: 13px 27px;
+    border: none;
+    border-radius: 30px;
+    background: #fff0f3;
+    color: #8b2345;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 5px 18px #31091c55;
+}
+
+.open-btn:hover {
+    transform: translateY(-3px);
+    background: #ffe0e8;
+    box-shadow: 0 8px 24px #31091c66;
+}
+
+.open-btn:active {
+    transform: scale(0.97);
+}
+
+/* Bức thư */
+.letter {
+    display: none;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    text-align: left;
+    background: #fffaf5;
+    color: #633746;
+    padding: 24px 22px;
+    border: 2px solid #e8b6bd;
+    border-radius: 14px;
+    box-shadow: 0 15px 45px #31091c66;
+    line-height: 1.85;
+    scrollbar-width: thin;
+    scrollbar-color: #d88ba0 #fbe9ed;
+    animation: appear 0.7s ease;
+}
+
+.letter.show {
+    display: block;
+}
+
+.letter h2 {
+    color: #a52c50;
+    font-family: Georgia, serif;
+    font-size: 23px;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.letter p {
+    font-size: 15px;
+    margin-bottom: 17px;
+}
+
+.letter .greeting {
+    font-weight: bold;
+    color: #a52c50;
+}
+
+.letter .decoration {
+    text-align: center;
+    font-size: 25px;
+    margin: 20px 0;
+}
+
+.letter .signature {
+    text-align: right;
+    color: #a52c50;
+    font-style: italic;
+    margin-top: 24px;
+}
+
+.close-btn {
+    display: block;
+    margin: 22px auto 0;
+    padding: 11px 24px;
+    border: none;
+    border-radius: 25px;
+    background: #a52c50;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    background: #781b39;
+    transform: translateY(-2px);
+}
+
+/* Hiệu ứng mở thư */
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-height: 96vh;
+    }
+
+    .letter {
+        max-height: 90vh;
+        padding: 20px 17px;
+    }
+
+    .letter h2 {
+        font-size: 21px;
+    }
+
+    .letter p {
+        font-size: 14px;
+    }
+
+    .intro p {
+        font-size: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .petal {
+        animation-duration: 24s !important;
+    }
+
+    .intro .icon {
+        animation: none;
+    }
+
+    .letter {
+        animation: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Màn hình chào -->
+    <div class="intro" id="intro">
+        <div class="icon">💌</div>
+
+        <h1>Lá Thư Gửi Mẹ Yêu Thương</h1>
+
+        <p>
+            Chúc mừng Ngày Phụ nữ Việt Nam 20/10 🌹<br>
+            Gửi đến người phụ nữ tuyệt vời nhất đời con<br>
+            — Mẹ yêu của con! ❤️
+        </p>
+
+        <button class="open-btn" id="openBtn" onclick="openLetter()">
+            🌷 Mở thư gửi mẹ 🌷
+        </button>
+    </div>
+
+    <!-- Nội dung bức thư -->
+    <article class="letter" id="letter">
+
+        <h2>🌹 Chúc Mừng Ngày 20/10 🌹</h2>
+
+        <p class="greeting">Gửi mẹ yêu quý của con! ❤️</p>
+
+        <p>
+            Nhân ngày Phụ nữ Việt Nam 20/10, con muốn gửi đến mẹ
+            những lời chúc yêu thương nhất. Con chúc mẹ luôn mạnh khỏe,
+            bình an, vui vẻ và lúc nào cũng nở nụ cười thật tươi.
+            Với con, mẹ không chỉ là người mẹ tuyệt vời mà còn là
+            người phụ nữ mạnh mẽ, kiên cường và đáng kính nhất trên đời.
+        </p>
+
+        <p>
+            Con cảm ơn mẹ vì suốt bao năm qua đã luôn cần cù,
+            chịu thương chịu khó, vất vả làm lụng để nuôi anh em con
+            khôn lớn. Con biết rằng đằng sau những bữa cơm đủ đầy,
+            những ngày tháng bình yên của chúng con là biết bao
+            công sức, mồ hôi và cả những nhọc nhằn mà mẹ âm thầm
+            gánh chịu. Mẹ luôn cố gắng dành những điều tốt đẹp nhất
+            cho các con, dù đôi khi bản thân mẹ phải chịu nhiều
+            thiệt thòi và mệt mỏi.
+        </p>
+
+        <p>
+            Điều khiến con thương và khâm phục mẹ hơn cả là sự mạnh mẽ
+            của mẹ trong những ngày ba bị bệnh. Khi gia đình gặp khó khăn,
+            mẹ vẫn cố gắng đi làm, vẫn gồng gánh bao lo toan để chăm lo
+            cho gia đình và nuôi anh em con. Chắc hẳn đã có những ngày
+            mẹ rất mệt, rất buồn và có những lúc chẳng biết chia sẻ
+            cùng ai. Nhưng mẹ vẫn không bỏ cuộc, vẫn kiên trì bước tiếp
+            vì những người mà mẹ yêu thương.
+        </p>
+
+        <p>
+            Con thật sự khâm phục nghị lực của mẹ. Mẹ đã cho con hiểu
+            rằng sức mạnh không phải là không biết mệt mỏi hay đau buồn,
+            mà là dù cuộc sống có khó khăn đến đâu, mình vẫn cố gắng
+            đứng dậy và tiếp tục vì gia đình. Đối với con, mẹ chính là
+            tấm gương sáng về tình yêu thương, sự hy sinh và lòng
+            kiên cường. Con biết rằng chẳng lời nào có thể nói hết
+            những vất vả mà mẹ đã trải qua, cũng chẳng món quà nào
+            có thể đền đáp hết công ơn của mẹ.
+        </p>
+
+        <p>
+            Con xin lỗi mẹ vì đôi khi còn vô tâm, chưa hiểu hết những
+            nỗi lo của mẹ, chưa biết cách thể hiện tình yêu thương
+            và chưa làm được nhiều điều để mẹ vui lòng. Con sẽ cố gắng
+            trưởng thành hơn, biết quan tâm đến mẹ nhiều hơn và sống
+            thật tốt để mẹ có thể yên lòng. Con mong rằng sau những
+            tháng ngày vất vả, mẹ sẽ dành nhiều thời gian hơn cho bản thân,
+            nghỉ ngơi nhiều hơn và không còn phải lo lắng quá nhiều
+            cho anh em con nữa.
+        </p>
+
+        <div class="decoration">🌷 💗 🌷</div>
+
+        <p>
+            Nhân ngày 20/10, con chúc mẹ luôn dồi dào sức khỏe,
+            tâm hồn luôn bình yên, cuộc sống gặp nhiều niềm vui
+            và mọi điều tốt đẹp. Con mong ba luôn được mạnh khỏe,
+            gia đình mình luôn bình an, yêu thương và cùng nhau
+            vượt qua mọi khó khăn. Mong những ngày tháng sau này
+            sẽ dịu dàng với mẹ hơn, để mẹ được sống vui vẻ,
+            hạnh phúc và nhận lại thật nhiều yêu thương.
+        </p>
+
+        <p>
+            <strong>
+                Cảm ơn mẹ vì đã luôn mạnh mẽ, vì đã không ngừng cố gắng
+                và vì đã dành cả tình yêu thương của mình để nuôi anh em con
+                khôn lớn. Con tự hào vì được làm con của mẹ.
+                Con yêu mẹ nhiều lắm! ❤️🌹
+            </strong>
+        </p>
+
+        <p class="signature">
+            Chúc mẹ yêu ngày 20/10 thật hạnh phúc!<br>
+            ❤️ Con yêu của mẹ ❤️
+        </p>
+
+        <button class="close-btn" onclick="closeLetter()">
+            💌 Gấp thư lại
+        </button>
+
+    </article>
+
+</div>
+
+<script>
+// Những bông hoa và cánh hoa trang trí
+const flowers = ["🌹", "🌸", "🌷", "🌹", "💮"];
+
+function createPetal() {
+    const petal = document.createElement("span");
+
+    petal.className = "petal";
+    petal.textContent =
+        flowers[Math.floor(Math.random() * flowers.length)];
+
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.fontSize = (14 + Math.random() * 15) + "px";
+
+    // Mỗi bông hoa rơi chậm trong 12–20 giây
+    petal.style.animationDuration = (12 + Math.random() * 8) + "s";
+
+    // Hoa xuất hiện với độ trễ ngẫu nhiên
+    petal.style.animationDelay = "0s";
+
+    document.body.appendChild(petal);
+
+    // Xóa hoa sau khi rơi khỏi màn hình
+    setTimeout(() => {
+        petal.remove();
+    }, 21000);
+}
+
+// Rải hoa ban đầu
+for (let i = 0; i < 18; i++) {
+    setTimeout(createPetal, i * 500);
+}
+
+// Hoa tiếp tục rơi nhẹ nhàng liên tục
+setInterval(createPetal, 850);
+
+// Mở thư
+function openLetter() {
+    document.getElementById("intro").hidden = true;
+
+    const letter = document.getElementById("letter");
+    letter.classList.add("show");
+
+    // Đưa thư về đầu để bắt đầu đọc
+    letter.scrollTop = 0;
+}
+
+// Gấp thư và trở về màn hình ban đầu
+function closeLetter() {
+    document.getElementById("letter").classList.remove("show");
+    document.getElementById("intro").hidden = false;
+}
+</script>
+
+</body>
+</html>
